@@ -1,17 +1,23 @@
 const express  = require("express");
 const http = require("http");
+const path = require("path");
 const socket = require("socket.io");
 
 const app = express();
 const server = http.createServer(app);
 const io = socket(server);
 
+
+app.use(express.static(path.join(__dirname,"../dist")));
+
+app.get("*",function(req,res){
+    res.sendFile(path.join(__dirname,"../dist/index.html"));
+});
+
 app.get("/",function(req,res){
     res.send("app works this way i guess");
 });
-// app.get("/meeting",function(req,res){
-//     res.send("disp;ay meeting screen");
-// });
+
 
 io.on("connection",function(socket){
 
