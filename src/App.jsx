@@ -22,6 +22,7 @@ function App() {
   });
 
   function handleStartCall(){
+    console.log('inside handle start click');
     socket.connect()
     let peer = new SimplePeer({initiator:true,trickle:false, stream:vidStream});
 
