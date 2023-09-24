@@ -1,8 +1,11 @@
 import { useEffect, useRef, useState, useImperativeHandle } from "react";
-import socket from "socket.io-client";
+import { io } from "socket.io-client";
 import Peer  from "simple-peer";
 
+
 import { LocalVideo,RemoteVideo } from "./components/video";
+
+const socket = io(undefined,{autoConnect:false});
 
 function App() {
 
@@ -19,6 +22,7 @@ function App() {
   });
 
   function handleStartCall(){
+    socket.connect()
     let peer = new Peer({initiator:true,trickle:false, stream:vidStream});
 
     peer.on("signal",function(data){
@@ -38,6 +42,7 @@ function App() {
   }
 
   function handleJoinCall(){
+    socket.connect()
     let peer = new Peer({initiator:false,trickle:false, stream:vidStream});
 
     peer.on("signal",function(data){
@@ -50,9 +55,12 @@ function App() {
 
     socket.emit("join",'room-1');
 
+  
+
     socket.on("offer",function(data){
       peer.signal(JSON.parse(data))
     })
+
 
   }
 
