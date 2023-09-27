@@ -22,11 +22,11 @@ export default function ZocketZone(){
         setText(init=> "");
     }
 
-    function appendMessageToState({message, whoAmI ="",date = ""}){
+    function appendMessageToState({message, whoAmI =""}){
         console.log("this is the message",message);
         setMessages(function(initArray){
             console.log(initArray);
-            const newRay = initArray.concat([{message,whoAmI,date}]);
+            const newRay = initArray.concat([{message,whoAmI,date:new Date().toTimeString().slice(0,5)}]);
             console.log(newRay); 
             return newRay 
         });
@@ -35,7 +35,7 @@ export default function ZocketZone(){
     function MessagesComponent(){
        return <div id="listOfMessagesContainer">
             {Messages.map(function(singleMessage){
-                return (singleMessage.whoAmI === "") ? <MeMessage message={singleMessage.message} /> : <OthersMessage message={singleMessage.message} name={singleMessage.whoAmI} time={singleMessage.date}  />
+                return (singleMessage.whoAmI === "") ? <MeMessage message={singleMessage.message} date={singleMessage.date} /> : <OthersMessage message={singleMessage.message} name={singleMessage.whoAmI} time={singleMessage.date}  />
             })}
         </div>
     }
@@ -66,9 +66,9 @@ function OthersMessage({message, name, time}){
             </div>
 }
 
-function MeMessage({message}){
+function MeMessage({message,date}){
     return <div id="meMessageDiv">
                 <p id="meMessageP">{message}</p>
-                <span id="meMessageSpan" ><p  id="meMeP">{new Date().getMinutes()}</p></span>
+                <span id="meMessageSpan" ><p  id="meMeP">{date}</p></span>
             </div>
 }
