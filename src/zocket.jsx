@@ -1,4 +1,5 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
+import { io } from "socket.io-client";
 import './styles/index.css';
 
 
@@ -9,6 +10,11 @@ export default function ZocketZone(){
     const [Messages, setMessages] = useState([]);
     const [Text, setText] = useState('');
     const [Room, setRoom] = useState('');
+
+
+    useEffect(function(){
+        const  socket =  io("http://localhost:3000");
+    })
 
     function handleInputChange( val, setteaux){
         setteaux(function(v){
