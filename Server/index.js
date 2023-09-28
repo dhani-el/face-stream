@@ -21,7 +21,7 @@ app.get("/",function(req,res){
 
 io.on("connection",function(socket){
 
-
+    console.log(socket.id);
     socket.on("join",function(room){
 
         socket.join(room);
