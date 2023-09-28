@@ -1,0 +1,96 @@
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+#containerDiv{
+    background-color: powderblue;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    flex-direction: column;
+    [data-output = bigScreen]{
+        background-color: aliceblue;
+        width: 90%;
+        height: 60%;
+        border: steelblue 2px solid;
+        margin-bottom: 1em;
+        overflow-y: scroll;
+        #listOfMessagesContainer{
+            width: 100%;
+            padding: 0.5em;
+            display: flex;
+            flex-direction: column;
+            #meMessageDiv{
+                align-self: end;
+                padding: 0.5em;
+                margin-bottom: 1em;
+                background-color: aqua;
+                border-radius: 0.7em;
+                max-width: 51%;
+                display: flex;
+                flex-direction: column;
+                #meMessageP{
+                    font-size: 1.2em;
+                    word-break: break-all;
+                }
+                #meMessageSpan{
+                    align-self: end;
+                    p{
+                        margin-right: 1em;
+
+                    font-size: 1em;
+                    color: rgb(59, 59, 59);
+                    margin-top: 0.4em;
+                        }
+                }
+            }
+            #othersMessageDiv{
+                align-self: end;
+                padding: 0.5em;
+                margin-bottom: 1em;
+                background-color: slateblue;
+                border-radius: 0.7em;
+                max-width: 51%;
+                display: flex;
+                flex-direction: column;
+                #othersMessageP{
+                    font-size: 1.2em;
+                    word-break: break-all;
+                }
+                #othersMessageSpanTime{
+                    align-self: end;
+                    p{
+                        margin-right: 1em;
+                    font-size: 1em;
+                    color: rgb(59, 59, 59);
+                    margin-top: 0.4em;
+                        }
+                }
+            }
+        }
+    }
+    .inputContainer{
+        width: 100%;
+        display: flex;
+        align-items: center;
+        margin-bottom: 2em;
+        justify-content: center;
+
+    }
+    input{
+        line-height: 2.4em;
+        font-size: 1.2em;
+        width: 80%;
+    }
+    button{
+        line-height: 2.6em;
+        font-size: 1em;
+        width: 5%;
+    }
+
+}
