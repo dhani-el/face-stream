@@ -5,7 +5,11 @@ const socket = require("socket.io");
 
 const app = express();
 const server = http.createServer(app);
-const io = socket(server);
+const io = socket(server,{
+    cors:{
+        origin:["http://localhost:5173"]
+    }
+});
 
 
 app.use(express.static(path.join(__dirname,"../dist")));
