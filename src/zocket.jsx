@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { io } from "socket.io-client";
 import './styles/index.css';
 
-
+const  socket =  io("http://localhost:3000");
 
 export default function ZocketZone(){
     const bigScreenRef = useRef(null);
@@ -13,8 +13,14 @@ export default function ZocketZone(){
 
 
     useEffect(function(){
-        const  socket =  io("http://localhost:3000");
-    })
+        socket.on("connect",function(){
+            appendMessageToState({message:`you connected to ${socket.id}`})
+        });
+        socket.on("receive-message", function(text){
+            console.log("one");
+            appendMessageToState({message:text, whoAmI:"others"})
+        })
+    },[]);
 
     function handleInputChange( val, setteaux){
         setteaux(function(v){
@@ -22,10 +28,15 @@ export default function ZocketZone(){
         })
     }
 
-    function handleInputSubmit(value){
-        appendMessageToState({message:Text});
-        textInputRef.current.value = ""
-        setText(init=> "");
+    async function handleInputSubmit(value){
+        return new Promise(function(resolve){
+            appendMessageToState({message:Text});
+            textInputRef.current.value = "";
+            setText(init=> "");
+            return resolve()
+        }).then(function(result){
+            socket.emit("send-message",Text)
+        })
     }
 
     function appendMessageToState({message, whoAmI =""}){

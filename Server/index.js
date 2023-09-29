@@ -26,6 +26,10 @@ app.get("/",function(req,res){
 io.on("connection",function(socket){
 
     console.log(socket.id);
+    socket.on("send-message",function(text){
+        console.log(text);
+        socket.broadcast.emit("receive-message",text)
+    })
     socket.on("join",function(room){
 
         socket.join(room);
