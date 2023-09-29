@@ -28,7 +28,7 @@
   flex-direction: column;
 }
 #containerDiv [data-output=bigScreen] #listOfMessagesContainer #meMessageDiv {
-  align-self: end;
+  align-self: flex-end;
   padding: 0.5em;
   margin-bottom: 1em;
   background-color: aqua;
@@ -51,7 +51,6 @@
   margin-top: 0.4em;
 }
 #containerDiv [data-output=bigScreen] #listOfMessagesContainer #othersMessageDiv {
-  align-self: end;
   padding: 0.5em;
   margin-bottom: 1em;
   background-color: slateblue;

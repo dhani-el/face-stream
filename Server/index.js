@@ -5,7 +5,11 @@ const socket = require("socket.io");
 
 const app = express();
 const server = http.createServer(app);
-const io = socket(server);
+const io = socket(server,{
+    cors:{
+        origin:["http://localhost:5173"]
+    }
+});
 
 
 app.use(express.static(path.join(__dirname,"../dist")));
@@ -21,7 +25,11 @@ app.get("/",function(req,res){
 
 io.on("connection",function(socket){
 
-
+    console.log(socket.id);
+    socket.on("send-message",function(text){
+        console.log(text);
+        socket.broadcast.emit("receive-message",text)
+    })
     socket.on("join",function(room){
 
         socket.join(room);

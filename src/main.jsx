@@ -6,5 +6,6 @@ import ZocketZone from './zocket.jsx';
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <ZocketZone />
-  </React.StrictMode>,
+  </React.StrictMode>
+  ,
 )
