@@ -35,7 +35,7 @@ export default function ZocketZone(){
             setText(init=> "");
             return resolve()
         }).then(function(result){
-            socket.emit("send-message",Text)
+            socket.emit("send-message",Text,Room)
         })
     }
 
@@ -57,6 +57,10 @@ export default function ZocketZone(){
         </div>
     }
 
+    function handleRoomSubmit(){
+        socket.emit("room-change",Room)
+    }
+
     return <div id="containerDiv">
 
         <div data-output = "bigScreen" ref={bigScreenRef} >
@@ -68,7 +72,7 @@ export default function ZocketZone(){
         </div>
 
         <div className="inputContainer">
-            <button>Room</button>  <input data-input ="room"  onChange={ function(e){ handleInputChange(e.target.value,setRoom)}} ></input><button  >Send</button>
+            <button>Room</button>  <input data-input ="room"  onChange={ function(e){ handleInputChange(e.target.value,setRoom)}} ></input><button  onClick={()=> handleRoomSubmit()} >Send</button>
         </div>
 
     </div>

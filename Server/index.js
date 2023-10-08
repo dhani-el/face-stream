@@ -24,12 +24,18 @@ app.get("/",function(req,res){
 
 
 io.on("connection",function(socket){
-
     console.log(socket.id);
-    socket.on("send-message",function(text){
+    socket.join("public");
+    socket.on("send-message",function(text,room){
         console.log(text);
-        socket.broadcast.emit("receive-message",text)
+        room === "" ? socket.to("public").emit("receive-message",text) : socket.to(room).emit("receive-message",text)
     })
+
+    socket.on("room-change",function(room){
+        console.log(room);
+        socket.join(room)
+    })
+
     socket.on("join",function(room){
 
         socket.join(room);
@@ -54,7 +60,8 @@ io.on("connection",function(socket){
 
     });
     
-})
+});
+
 
 
 server.listen(3000, function(){
