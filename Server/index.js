@@ -11,7 +11,6 @@ const io = socket(server,{
     }
 });
 
-
 app.use(express.static(path.join(__dirname,"../dist")));
 
 app.get("*",function(req,res){
@@ -21,7 +20,6 @@ app.get("*",function(req,res){
 app.get("/",function(req,res){
     res.send("app works this way i guess");
 });
-
 
 io.on("connection",function(socket){
     console.log(socket.id);
@@ -37,10 +35,18 @@ io.on("connection",function(socket){
     })
 
     socket.on("join",function(room){
-
         socket.join(room);
-
     });
+
+    socket.on("start-call",(name, room)=>{
+        console.log(`${name} wants to ceate a call at the room ${room}`);
+        socket.join(room);
+    })
+
+    socket.on("join-call",(peerId)=>{
+        socket.join("room-1");
+        socket.to("room-1").emit("new-user","a new user joined with a peerid of" , peerId);
+    })
 
     socket.on("offer", function(offer,room){
 
@@ -61,8 +67,6 @@ io.on("connection",function(socket){
     });
     
 });
-
-
 
 server.listen(3000, function(){
     console.log("server is live");
