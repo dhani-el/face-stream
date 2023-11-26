@@ -39,7 +39,7 @@ io.on("connection",function(socket){
     });
 
     socket.on("start-call",(name, room)=>{
-        console.log(`${name} wants to ceate a call at the room ${room}`);
+        console.log(`${name} wants to create a call at the room ${room}`);
         socket.join(room);
     })
 
@@ -47,6 +47,11 @@ io.on("connection",function(socket){
         socket.join("room-1");
         socket.to("room-1").emit("new-user","a new user joined with a peerid of" , peerId);
     })
+
+
+    socket.on("new-user-stream",(userStream)=>{
+        socket.to("room-1").emit("addNewUser",userStream);
+    });
 
     socket.on("offer", function(offer,room){
 
